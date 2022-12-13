@@ -7,7 +7,7 @@
 if [[ "$2" == P* ]]
 then
 #cat M275-05/M275-05_K12MG1655_Chr1_stat2.txt | head -n1 | cut -f4,6
-    mkdirhier ${MEDMADDIR}
+    mkdir ${MEDMADDIR} # owen changed this line. Was "mkdirhier ${MEDMADDIR}"
     cat ${LIST} | xargs -I{} sh -c "head -n1 ${BASE}/${JOB}/{}/{}*_stat2.txt | cut -f4,6 > ${MEDMADDIR}/{}.medMAD"
 fi
 
@@ -16,7 +16,7 @@ fi
 #-------------------------------
 if [[ "$2" == *1* ]]
 then
-    mkdirhier ${OUTDIR}/abruijn
+    mkdir ${OUTDIR}/abruijn # owen changed this line. Was "mkdirhier ${OUTDIR}/abruijn"
     cat ${LIST} | xargs -I{} -P${CPU} sh -c "cd ${OUTDIR}/abruijn;mkdir {};cd {};bwa mem -M -t 1 ${REFSEQ} ${DATADIR}/{}/{}_1.fq.gz ${DATADIR}/{}/{}_2.fq.gz > {}_PE"
 fi
 

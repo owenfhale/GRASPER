@@ -1,8 +1,8 @@
 #PATH to RepGraph package is installed.
-REPGRAPH_BIN=/home/data1/groups/heewlee/MA/Simulation_data/eColi_ABruijn/NEW6_TANDEM/IU_GIT/RepGraph
+REPGRAPH_BIN=/home/haleof/tools/GRASPER/RepGraph
 
 #PATH to the bin directory under GRASPER installation directory
-GRASPER_BIN=/data/groups/heewlee/MA/Simulation_data/eColi_ABruijn/NEW6_TANDEM/IU_GIT/GRASPER/bin
+GRASPER_BIN=/home/haleof/tools/GRASPER/bin
 
 #Number of CPU cores (used for BLAST, bwa and grasper_mutli.sh)
 CPU=1
@@ -67,5 +67,5 @@ DATADIR=run5_data
 
 #PATH to the medmadfile (absolute path should be used unless you are running it from the directory where this file is present)
 #this parameter can be specified to overide (NOT RECOMMENDED)
-#MEDMADFILE=testcase.medMAD
+MEDMADFILE=testcase.medMAD
 

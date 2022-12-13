@@ -1,0 +1,43 @@
+This should work on ACCRE using the modules listed below:
+
+GCC/6.4.0-2.28 BWA/0.7.17 BLAST/2.2.26     # these are for running all the GRASPER tools
+GCC/6.4.0-2.28 SAMtools/1.6                # these are for converting the sam file into a sorted bam file to enter into Picard
+GCCcore/.8.2.0 GATK/4.1.2.0-Java-1.8.0_192 # these are for running the CollectInsertSizeMetrics function from Picard to calculate insert size median and median absolute deviation (MAD)
+
+
+All changes are marked with a comment containing the string "owen"
+
+
+CHANGES MUST BE MADE BEFORE RUNNING ANY MAKE COMMANDS
+after running make commands remember to give yourself excecute permissions
+
+GRASPER/src/Read.java: changed the isUniqueMapping to get the right indices from the sam file
+
+	// owen: changing some index values because they don't match my BWA SAM output
+	// owen: commented code is the original code of the line above it and the line below is the reason for the change
+    private boolean isUniqueMapping(String[] tokens){
+		try{
+			int alignscore = Integer.parseInt(tokens[14].substring(tokens[14].lastIndexOf(":")+1));
+			//int alignscore = Integer.parseInt(tokens[13].substring(tokens[13].lastIndexOf(":")+1));
+			//the alignment score column of the SAM file made by BWA is at the 14th index postition, not the 13th. This column starts with the string "AS".
+			int suboptimalscore = Integer.parseInt(tokens[15].substring(tokens[15].lastIndexOf(":")+1));
+			//int suboptimalscore = Integer.parseInt(tokens[14].substring(tokens[13].lastIndexOf(":")+1));
+			//the suboptimal alignment score is in the 15th column of the sam file. This column starts with the string "XS"
+			if(alignscore > suboptimalscore)
+			return true;
+		}catch(Exception e){
+			e.printStackTrace();
+			for(int i=0;i<tokens.length;i++)
+			System.err.print("\t" + tokens[i]);
+			System.err.println();
+			System.exit(0);
+		}
+		return false;
+		}
+
+
+RepGraph/Makefile: changed all instances of "mkdirhier" to "mkdir" because I don't have mkdirhier on my system
+
+grasper_multi.sh: changed all instances of "mkdirhier" to "mkdir" because I don't have mkdirhier on my system
+
+test_data/: added the test read files 20Insertions_per_element_1TH_pIRS_20X_11_90_470_1.fq.gz 20Insertions_per_element_1TH_pIRS_20X_11_90_470_2.fq.gz 

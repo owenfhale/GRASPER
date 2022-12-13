@@ -92,22 +92,27 @@ public class Read implements Comparable<Read>{
 	return sumMI;
     }
 
+	// owen: changing some index values because they don't match my BWA SAM output
+	// owen: commented code is the original code of the line above it and the line below is the reason for the change
     private boolean isUniqueMapping(String[] tokens){
-	try{
-	    int alignscore = Integer.parseInt(tokens[13].substring(tokens[13].lastIndexOf(":")+1));
-	    int suboptimalscore = Integer.parseInt(tokens[14].substring(tokens[13].lastIndexOf(":")+1));
-	    if(alignscore > suboptimalscore)
-		return true;
-	}catch(Exception e){
-	    e.printStackTrace();
-	    for(int i=0;i<tokens.length;i++)
-		System.err.print("\t" + tokens[i]);
-	    System.err.println();
-	    System.exit(0);
-	}
-	return false;
-    }
-
+		try{
+			int alignscore = Integer.parseInt(tokens[14].substring(tokens[14].lastIndexOf(":")+1));
+			//int alignscore = Integer.parseInt(tokens[13].substring(tokens[13].lastIndexOf(":")+1));
+			//the alignment score column of the SAM file made by BWA is at the 14th index postition, not the 13th. This column starts with the string "AS".
+			int suboptimalscore = Integer.parseInt(tokens[15].substring(tokens[15].lastIndexOf(":")+1));
+			//int suboptimalscore = Integer.parseInt(tokens[14].substring(tokens[13].lastIndexOf(":")+1));
+			//the suboptimal alignment score is in the 15th column of the sam file. This column starts with the string "XS"
+			if(alignscore > suboptimalscore)
+			return true;
+		}catch(Exception e){
+			e.printStackTrace();
+			for(int i=0;i<tokens.length;i++)
+			System.err.print("\t" + tokens[i]);
+			System.err.println();
+			System.exit(0);
+		}
+		return false;
+		}
 
 
     //updates the linpos to midpost rather than 5' left position in linear coordinate
