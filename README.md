@@ -10,8 +10,7 @@ I have not fixed the first issue but the CollectInsertSizeMetrics function from 
 
 
 
-=================================================== Below is the original README ===================================================
-
+==================== Below is the original README ====================
 
 GRASPER
 Heewook Lee
