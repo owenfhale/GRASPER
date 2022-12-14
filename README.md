@@ -1,16 +1,14 @@
-This repository is a fork of Heelook Lee's GRASPER with some minor changes.
+This repository is a fork of Heewook Lee's GRASPER with some minor changes.
 
-The two major problems I had with the original code are:
+Adjustments made for my workflow:
 
-1. The code does not create the medMAD file that it is supposed to make
-2. The Read.java script retrieves information from the SAM file from the wrong columns
-
-The second issue is fixed  in this repository.
-I have not fixed the first issue but the CollectInsertSizeMetrics function from Picard can be used to get the insert size median and MAD.
+1. Using Picard CollectInsertSizeMetrics function to get the insert size median and MAD
+2. Change indexing for SAM file indexing
+3. Change "mkdirhier" commands to "mkdir"
 
 
 
-==================== Below is the original README ====================
+========== Below is the original README ==========
 
 GRASPER
 Heewook Lee
